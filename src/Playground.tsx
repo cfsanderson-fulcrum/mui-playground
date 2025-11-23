@@ -1,121 +1,129 @@
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import ButtonBase from '@mui/material/ButtonBase';
-import Typography from '@mui/material/Typography';
+import {
+  Box,
+  Button,
+  Checkbox,
+  Container,
+  FormControlLabel,
+  Link,
+  Paper,
+  TextField,
+  Typography,
+  Stack,
+} from '@mui/material';
 
-const images = [
-  {
-    url: 'https://images.unsplash.com/photo-1493770348161-369560ae357d?auto=format&fit=crop&w=800',
-    title: 'Breakfast',
-    width: '100%',
-  },
-  {
-    url: 'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=800',
-    title: 'Lunch',
-    width: '100%',
-  },
-  {
-    url: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=800',
-    title: 'Dinner',
-    width: '100%',
-  },
-];
-
-const ImageButton = styled(ButtonBase)(({ theme }) => ({
-  position: 'relative',
-  height: 200,
-  [theme.breakpoints.down('sm')]: {
-    width: '100% !important', // Overrides inline-style
-    height: 100,
-  },
-  '&:hover, &.Mui-focusVisible': {
-    zIndex: 1,
-    '& .MuiImageBackdrop-root': {
-      opacity: 0.15,
-    },
-    '& .MuiImageMarked-root': {
-      opacity: 0,
-    },
-    '& .MuiTypography-root': {
-      border: '4px solid currentColor',
-    },
-  },
-}));
-
-const ImageSrc = styled('span')({
-  position: 'absolute',
-  left: 0,
-  right: 0,
-  top: 0,
-  bottom: 0,
-  backgroundSize: 'cover',
-  backgroundPosition: 'center 40%',
-});
-
-const Image = styled('span')(({ theme }) => ({
-  position: 'absolute',
-  left: 0,
-  right: 0,
-  top: 0,
-  bottom: 0,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  color: theme.palette.common.white,
-}));
-
-const ImageBackdrop = styled('span')(({ theme }) => ({
-  position: 'absolute',
-  left: 0,
-  right: 0,
-  top: 0,
-  bottom: 0,
-  backgroundColor: theme.palette.common.black,
-  opacity: 0.4,
-  transition: theme.transitions.create('opacity'),
-}));
-
-const ImageMarked = styled('span')(({ theme }) => ({
-  height: 3,
-  width: 18,
-  backgroundColor: theme.palette.common.white,
-  position: 'absolute',
-  bottom: -2,
-  left: 'calc(50% - 9px)',
-  transition: theme.transitions.create('opacity'),
-}));
-
-export default function ButtonBaseDemo() {
+export default function SignIn() {
   return (
-    <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' }}>
-      {images.map((image) => (
-        <ImageButton
-          focusRipple
-          key={image.title}
-          style={{
-            width: image.width,
+    <>
+      <div className="fulcrum-background" />
+      <Container component="main" maxWidth="xs" sx={{ position: 'relative' }}>
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
           }}
         >
-          <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
-          <ImageBackdrop className="MuiImageBackdrop-root" />
-          <Image>
-            <Typography
-              component="span"
-              variant="subtitle1"
-              color="inherit"
-              sx={(theme) => ({
-                position: 'relative',
-                p: 4,
-                pt: 2,
-                pb: `calc(${theme.spacing(1)} + 6px)`,
-              })}
+        <Box
+          component="img"
+          src="https://webassets.fulcrumapp.com/assets-eab24d3faeb5d558387b6c3a79a1a345602decd3/images/registration/fulcrum-logo1.png"
+          alt="Fulcrum Logo"
+          sx={{ mb: 4, height: 50 }}
+        />
+
+        <Paper
+          elevation={3}
+          sx={{
+            p: 4,
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 2,
+          }}
+        >
+          <Typography component="h2" variant="h5" sx={{ fontWeight: 'bold' }}>
+            Sign In
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Welcome back. Sign into your Fulcrum account below.
+          </Typography>
+
+          <Box component="form" noValidate sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me on this computer"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{
+                mt: 3,
+                mb: 2,
+                bgcolor: '#d32f2f',
+                '&:hover': { bgcolor: '#b71c1c' },
+              }}
             >
-              {image.title}
-              <ImageMarked className="MuiImageMarked-root" />
-            </Typography>
-          </Image>
-        </ImageButton>
-      ))}
-    </Box>
+              Sign In
+            </Button>
+
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <Link
+                href="https://web.fulcrumapp.com/users/saml"
+                variant="body2"
+                underline="hover"
+              >
+                Single Sign-on
+              </Link>
+              <Link
+                href="https://web.fulcrumapp.com/users/password/new"
+                variant="body2"
+                underline="hover"
+              >
+                Forgot your password?
+              </Link>
+            </Stack>
+          </Box>
+        </Paper>
+
+        <Box sx={{ mt: 3 }}>
+          <Typography variant="body2" color="text.secondary">
+            Don't have an account?{' '}
+            <Link
+              href="https://www.fulcrumapp.com/lps/free-trial-general"
+              variant="body2"
+              underline="hover"
+            >
+              Get a Free Trial
+            </Link>
+          </Typography>
+        </Box>
+      </Box>
+    </Container>
+    </>
   );
 }
